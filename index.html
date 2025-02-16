@@ -71,9 +71,10 @@
         .quote-container {
             padding: 20px;
             border-radius: 8px;
-            background-color: #f0f0f0;
             text-align: center;
             margin-top: 10px;
+            transition: background 0.3s ease;
+            background: linear-gradient(45deg, #f0f0f0, #ddd);
         }
 
         .quote {
@@ -146,10 +147,10 @@
             </p>
         </section>
 
-        <!-- Kanye West Quote API -->
+        <!-- Kanye West Quote API with Interactive Background -->
         <section>
             <h2>Inspirational Kanye Quote</h2>
-            <div class="quote-container">
+            <div class="quote-container" id="quote-box">
                 <p class="quote" id="kanye-quote">Loading Kanye wisdom...</p>
                 <button class="quote-btn" onclick="getKanyeQuote()">Get Another Quote</button>
             </div>
@@ -172,6 +173,22 @@
                     console.error('Error fetching Kanye quote:', error);
                 });
         }
+
+        // Interactive Background Effect
+        document.getElementById('quote-box').addEventListener('mousemove', (event) => {
+            const x = event.offsetX;
+            const y = event.offsetY;
+            const width = event.target.clientWidth;
+            const height = event.target.clientHeight;
+
+            // Calculate color values based on mouse position
+            const red = Math.round((x / width) * 255);
+            const blue = Math.round((y / height) * 255);
+            const green = 150; // Fixed value for aesthetic balance
+
+            // Apply new background color dynamically
+            event.target.style.background = `rgb(${red}, ${green}, ${blue})`;
+        });
 
         // Load Kanye Quote on page load
         window.onload = getKanyeQuote;
