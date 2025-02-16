@@ -58,6 +58,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
+            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5)); /* New CSS Property */
         }
 
         figcaption {
@@ -101,7 +102,7 @@
     <main>
         <section>
             <figure>
-                <img src="images/vangogh.jpg" alt="Vincent van Gogh Self-Portrait">
+                <img src="images/vvg.jpg" alt="Vincent van Gogh Self-Portrait">
                 <figcaption>Self-Portrait by Vincent van Gogh (1889)</figcaption>
             </figure>
         </section>
@@ -120,10 +121,19 @@
                 <a href="https://www.vangoghmuseum.nl/en" target="_blank">Van Gogh Museum</a>
             </p>
         </section>
+
+        <!-- New HTML Element: <details> -->
+        <section>
+            <h2>Did You Know?</h2>
+            <details>
+                <summary>Click to reveal a fun Van Gogh fact!</summary>
+                <p>Van Gogh painted over **900 paintings** in just **10 years**, including some of the most famous artworks of all time!</p>
+            </details>
+        </section>
     </main>
 
     <footer>
-        <p>This is a fotter for my website</p>
+        <p>This is a footer.</p>
     </footer>
 
 </body>
