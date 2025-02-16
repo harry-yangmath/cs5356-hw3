@@ -58,7 +58,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5)); /* New CSS Property */
+            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
         }
 
         figcaption {
@@ -67,11 +67,42 @@
             margin-top: 8px;
         }
 
-        /* Links */
-        a {
-            color: blue;
-            text-decoration: none;
+        /* Music Section */
+        .music-container {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 10px;
+            min-height: 150px;
+        }
+
+        .music-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .music-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .music-info {
+            margin-top: 10px;
+            font-size: 1.1rem;
             font-weight: bold;
+        }
+
+        .album-cover {
+            margin-top: 10px;
+            width: 150px;
+            border-radius: 8px;
         }
 
         /* Footer */
@@ -122,19 +153,52 @@
             </p>
         </section>
 
-        <!-- New HTML Element: <details> -->
+        <!-- Apple Music API: Fetch a Radiohead Song -->
         <section>
-            <h2>Did You Know?</h2>
-            <details>
-                <summary>Click to reveal a fun Van Gogh fact!</summary>
-                <p>Van Gogh painted over **900 paintings** in just **10 years**, including some of the most famous artworks of all time!</p>
-            </details>
+            <h2>Random Radiohead Song</h2>
+            <div class="music-container">
+                <p class="music-info" id="song-title">Click the button to get a Radiohead song.</p>
+                <img class="album-cover" id="album-cover" src="" alt="" style="display: none;">
+                <audio id="audio-player" controls style="display: none;"></audio>
+                <button class="music-btn" onclick="getRadioheadSong()">Get a Song</button>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>This is a footer.</p>
+        <p>This is my footer.</p>
     </footer>
+
+    <script>
+        function getRadioheadSong() {
+            fetch('https://itunes.apple.com/search?term=radiohead&entity=musicTrack&limit=1')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results.length > 0) {
+                        const song = data.results[0];
+
+                        // Update UI with song details
+                        document.getElementById('song-title').innerText = `"${song.trackName}" from the album "${song.collectionName}"`;
+
+                        // Update album cover
+                        const albumCover = document.getElementById('album-cover');
+                        albumCover.src = song.artworkUrl100;
+                        albumCover.style.display = "block";
+
+                        // Update audio player
+                        const audioPlayer = document.getElementById('audio-player');
+                        audioPlayer.src = song.previewUrl; // 30-second preview
+                        audioPlayer.style.display = "block";
+                    } else {
+                        document.getElementById('song-title').innerText = "No songs found.";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('song-title').innerText = "Failed to load song.";
+                    console.error('Error fetching song:', error);
+                });
+        }
+    </script>
 
 </body>
 </html>
