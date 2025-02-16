@@ -77,6 +77,18 @@
             min-height: 150px;
         }
 
+        .music-info {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .album-cover {
+            margin-top: 10px;
+            width: 150px;
+            border-radius: 8px;
+        }
+
         .music-btn {
             margin-top: 10px;
             padding: 10px 15px;
@@ -91,18 +103,6 @@
 
         .music-btn:hover {
             background-color: #0056b3;
-        }
-
-        .music-info {
-            margin-top: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .album-cover {
-            margin-top: 10px;
-            width: 150px;
-            border-radius: 8px;
         }
 
         /* Footer */
@@ -153,25 +153,24 @@
             </p>
         </section>
 
-        <!-- Apple Music API: Fetch a Radiohead Song -->
+        <!-- Apple Music API: Display "Karma Police" -->
         <section>
-            <h2>Random Radiohead Song</h2>
+            <h2>Now Playing: "Karma Police"</h2>
             <div class="music-container">
-                <p class="music-info" id="song-title">Click the button to get a Radiohead song.</p>
-                <img class="album-cover" id="album-cover" src="" alt="" style="display: none;">
+                <p class="music-info" id="song-title">Loading song details...</p>
+                <img class="album-cover" id="album-cover" src="" alt="Album Cover" style="display: none;">
                 <audio id="audio-player" controls style="display: none;"></audio>
-                <button class="music-btn" onclick="getRadioheadSong()">Get a Song</button>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>This is my footer.</p>
+        <p>This is my footer</p>
     </footer>
 
     <script>
-        function getRadioheadSong() {
-            fetch('https://itunes.apple.com/search?term=radiohead&entity=musicTrack&limit=1')
+        function getKarmaPolice() {
+            fetch('https://itunes.apple.com/search?term=radiohead+karma+police&entity=musicTrack&limit=1')
                 .then(response => response.json())
                 .then(data => {
                     if (data.results.length > 0) {
@@ -190,7 +189,7 @@
                         audioPlayer.src = song.previewUrl; // 30-second preview
                         audioPlayer.style.display = "block";
                     } else {
-                        document.getElementById('song-title').innerText = "No songs found.";
+                        document.getElementById('song-title').innerText = "Song not found.";
                     }
                 })
                 .catch(error => {
@@ -198,6 +197,9 @@
                     console.error('Error fetching song:', error);
                 });
         }
+
+        // Load Karma Police on page load
+        window.onload = getKarmaPolice;
     </script>
 
 </body>
