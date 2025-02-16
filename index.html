@@ -5,20 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent van Gogh</title>
     <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+        header {
+            width: 100%;
+            padding: 20px 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image Styling */
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         img {
-            width: 200px;
+            max-width: 100%;
+            height: auto;
             border-radius: 10px;
-            margin-top: 10px;
         }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        /* Links */
         a {
             color: blue;
             text-decoration: none;
             font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            background-color: #f4f4f4;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            main {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -31,7 +101,7 @@
     <main>
         <section>
             <figure>
-                <img src="images/vvg.jpg" alt="Vincent van Gogh Self-Portrait">
+                <img src="images/vangogh.jpg" alt="Vincent van Gogh Self-Portrait">
                 <figcaption>Self-Portrait by Vincent van Gogh (1889)</figcaption>
             </figure>
         </section>
@@ -53,7 +123,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Van Gogh Tribute | All rights reserved.</p>
+        <p>This is a fotter for my website</p>
     </footer>
 
 </body>
