@@ -67,29 +67,22 @@
             margin-top: 8px;
         }
 
-        /* Music Section */
-        .music-container {
+        /* Kanye Quote Section */
+        .quote-container {
             padding: 20px;
             border-radius: 8px;
             background-color: #f0f0f0;
             text-align: center;
             margin-top: 10px;
-            min-height: 150px;
         }
 
-        .music-info {
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
             margin-top: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
         }
 
-        .album-cover {
-            margin-top: 10px;
-            width: 150px;
-            border-radius: 8px;
-        }
-
-        .music-btn {
+        .quote-btn {
             margin-top: 10px;
             padding: 10px 15px;
             border: none;
@@ -101,7 +94,7 @@
             transition: background 0.3s;
         }
 
-        .music-btn:hover {
+        .quote-btn:hover {
             background-color: #0056b3;
         }
 
@@ -153,53 +146,35 @@
             </p>
         </section>
 
-        <!-- Apple Music API: Display "Karma Police" -->
+        <!-- Kanye West Quote API -->
         <section>
-            <h2>Now Playing: "Karma Police"</h2>
-            <div class="music-container">
-                <p class="music-info" id="song-title">Loading song details...</p>
-                <img class="album-cover" id="album-cover" src="" alt="Album Cover" style="display: none;">
-                <audio id="audio-player" controls style="display: none;"></audio>
+            <h2>Inspirational Kanye Quote</h2>
+            <div class="quote-container">
+                <p class="quote" id="kanye-quote">Loading Kanye wisdom...</p>
+                <button class="quote-btn" onclick="getKanyeQuote()">Get Another Quote</button>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>This is my footer</p>
+        <p>This is my footer.</p>
     </footer>
 
     <script>
-        function getKarmaPolice() {
-            fetch('https://itunes.apple.com/search?term=radiohead+karma+police&entity=musicTrack&limit=1')
+        function getKanyeQuote() {
+            fetch('https://api.kanye.rest/')
                 .then(response => response.json())
                 .then(data => {
-                    if (data.results.length > 0) {
-                        const song = data.results[0];
-
-                        // Update UI with song details
-                        document.getElementById('song-title').innerText = `"${song.trackName}" from the album "${song.collectionName}"`;
-
-                        // Update album cover
-                        const albumCover = document.getElementById('album-cover');
-                        albumCover.src = song.artworkUrl100;
-                        albumCover.style.display = "block";
-
-                        // Update audio player
-                        const audioPlayer = document.getElementById('audio-player');
-                        audioPlayer.src = song.previewUrl; // 30-second preview
-                        audioPlayer.style.display = "block";
-                    } else {
-                        document.getElementById('song-title').innerText = "Song not found.";
-                    }
+                    document.getElementById('kanye-quote').innerText = `"${data.quote}"`;
                 })
                 .catch(error => {
-                    document.getElementById('song-title').innerText = "Failed to load song.";
-                    console.error('Error fetching song:', error);
+                    document.getElementById('kanye-quote').innerText = "Failed to load Kanye's wisdom.";
+                    console.error('Error fetching Kanye quote:', error);
                 });
         }
 
-        // Load Karma Police on page load
-        window.onload = getKarmaPolice;
+        // Load Kanye Quote on page load
+        window.onload = getKanyeQuote;
     </script>
 
 </body>
